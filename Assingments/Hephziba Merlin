@@ -1,0 +1,32 @@
+int pir, buzz; float temp; void setup()
+{
+pir = 3;
+buzz = 12; pinMode(pir, INPUT); pinMode(buzz, OUTPUT); Serial.begin(9600);
+}
+
+void loop()
+{
+//Motion Monitoring
+int motion = digitalRead(pir); if(motion == 1)
+{
+tone(buzz,50);
+Serial.println("Motion Status: Detected"); delay(50);
+}
+else
+{
+noTone(buzz);
+Serial.println("Motion Status: Not Detected");
+}
+
+//Temperature Measurement float data = analogRead(A4);
+float temp =(((data/1024.0)*5)*100);
+ 
+Serial.print("Temperature is:"); Serial.println(temp); if(temp>60)
+{
+tone(buzz,200,200); delay(500);
+}
+else{
+noTone(buzz);
+}
+}
+
